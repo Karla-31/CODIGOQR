@@ -1,37 +1,26 @@
-const form = document.getElementById('contact-form');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const messageInput = document.getElementById('message');
-const phoneInput = document.getElementById('phone');
-const qrCodeContainer = document.getElementById('qr-code');
+const formulario = document.getElementById('formulario-contactos');
+const qrContainer = document.getElementById('qr-container');
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevenir envío predeterminado del formulario
+formulario.addEventListener('submit', (event) => {
+  event.preventDefault();
 
-  // Obtener los valores de los campos del formulario
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const message = messageInput.value.trim();
-  const phone = phoneInput.value.trim();
+  const nombre = document.getElementById('nombre').value;
+  const correo = document.getElementById('correo').value;
+  const telefono = document.getElementById('telefono').value;
 
-  // Verificar la longitud del contenido antes de generar el código QR
-  if (name.length > 50 || email.length > 50 || message.length > 100 || phone.length > 15) {
-    alert('Por favor, asegúrate de que los campos no excedan la longitud máxima.');
-    return; // Salir de la función sin generar el código QR
-  }
+  const datosContacto = {
+    nombre,
+    correo,
+    telefono
+  };
 
-  // Generar el contenido del código QR
-  const qrCodeData = `MECARD:N:${name};EMAIL:${email};TEL:${phone};MESSAGE:${message};`;
+  const datosJSON = JSON.stringify(datosContacto);
 
-  try {
-    // Crear el código QR utilizando la biblioteca
-    const qrcode = new QRCode(qrCodeContainer, {
-      text: qrCodeData,
-      width: 200,
-      height: 200,
-    });
-  } catch (error) {
-    // Capturar y mostrar cualquier error
-    console.error('Error al generar el código QR:', error);
-  }
+  // Utilizando la biblioteca qrcode.js para generar el código QR
+  qrContainer.innerHTML = '';
+  const qrCode = new QRCode(qrContainer, {
+    text: datosJSON,
+    width: 200,
+    height: 200
+  });
 });
