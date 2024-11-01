@@ -1,0 +1,12 @@
+<cerveceria>
+    <cerveza>
+        <nombre>IPA</nombre>
+        <tipo>India Pale Ale</tipo>
+        <abv>6.5</abv>
+    </cerveza>
+    <cerveza>
+        <nombre>Porter</nombre>
+        <tipo>Dark Ale</tipo>
+        <abv>5.2</abv>
+    </cerveza>
+</cerveceria>
